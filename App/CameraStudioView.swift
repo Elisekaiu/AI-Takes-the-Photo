@@ -23,6 +23,12 @@ struct CameraStudioView: View {
 
     @State private var simulateCall = false
     @State private var showSettings = false
+    @FocusState private var cameraChatFocused: Bool
+
+    private func sendCameraChat() {
+        model.sendChat()
+        cameraChatFocused = false
+    }
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -36,6 +42,12 @@ struct CameraStudioView: View {
             model.onCheckpoint = onCheckpoint
         }
         .animation(.easeOut(duration: 0.24), value: model.isOpen)
+        .onChange(of: model.latestPhoto != nil) { _, captured in
+            if captured { cameraChatFocused = false }
+        }
+        .onChange(of: model.isOpen) { _, open in
+            if !open { cameraChatFocused = false }
+        }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
             model.close() // 不用静音音频保活；离开相机即关闭
         }
@@ -177,7 +189,13 @@ struct CameraStudioView: View {
         GeometryReader { proxy in
             ZStack(alignment: .bottom) {
                 Palette.night.opacity(0.54).ignoresSafeArea()
-                    .onTapGesture { model.close() }
+                    .onTapGesture {
+                        if cameraChatFocused {
+                            cameraChatFocused = false
+                        } else {
+                            model.close()
+                        }
+                    }
                 VStack(spacing: 9) {
                     HStack(spacing: 10) {
                         Circle().fill(model.isReady ? Palette.mint : Palette.lilac)
@@ -228,15 +246,28 @@ struct CameraStudioView: View {
                             }
                         }
                     }
-                    .frame(height: 65)
+                    .frame(height: cameraChatFocused ? 40 : 65)
+                    .scrollDismissesKeyboard(.interactively)
                     .padding(.horizontal, 17)
 
                     HStack(spacing: 9) {
                         TextField("和你的 AI 说句话…", text: $model.draft)
                             .font(.system(size: 13))
+                            .focused($cameraChatFocused)
                             .submitLabel(.send)
-                            .onSubmit { model.sendChat() }
-                        Button { model.sendChat() } label: {
+                            .onSubmit { sendCameraChat() }
+                        if cameraChatFocused {
+                            Button {
+                                cameraChatFocused = false
+                            } label: {
+                                Image(systemName: "keyboard.chevron.compact.down")
+                                    .font(.system(size: 16))
+                                    .foregroundStyle(Palette.lilac)
+                                    .frame(width: 29, height: 29)
+                            }
+                            .accessibilityLabel("收起键盘")
+                        }
+                        Button { sendCameraChat() } label: {
                             Image(systemName: model.isThinking ? "ellipsis" : "arrow.up.circle.fill")
                                 .font(.system(size: 22))
                                 .foregroundStyle(Palette.lilac)
@@ -247,21 +278,27 @@ struct CameraStudioView: View {
                     .background(.white.opacity(0.07), in: RoundedRectangle(cornerRadius: 14))
                     .padding(.horizontal, 12)
 
-                    ZStack(alignment: .bottom) {
-                        if let image = model.latestPhoto {
-                            GeometryReader { frame in
-                                Image(uiImage: image).resizable().scaledToFill()
-                                    .frame(width: frame.size.width, height: frame.size.height).clipped()
+                    // The preview fills a bounded viewport. An aspect-fill
+                    // photo must never enlarge the layout and hide controls.
+                    GeometryReader { frame in
+                        ZStack(alignment: .bottom) {
+                            if let image = model.latestPhoto {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: frame.size.width, height: frame.size.height)
+                                    .clipped()
+                            } else if model.isReady {
+                                CameraPreview(session: model.camera.session, front: model.isFront)
+                                    .frame(width: frame.size.width, height: frame.size.height)
+                            } else {
+                                Rectangle().fill(.black)
+                                ProgressView("正在打开镜头")
                             }
-                        } else if model.isReady {
-                            CameraPreview(session: model.camera.session, front: model.isFront)
-                        } else {
-                            Rectangle().fill(.black)
-                            ProgressView("正在打开镜头")
-                        }
-                        LinearGradient(colors: [.clear, .black.opacity(0.1), .black.opacity(0.84)],
-                                       startPoint: .center, endPoint: .bottom)
-                        VStack {
+                            LinearGradient(colors: [.clear, .black.opacity(0.1), .black.opacity(0.84)],
+                                           startPoint: .center, endPoint: .bottom)
+                                .frame(width: frame.size.width, height: frame.size.height)
+                            VStack {
                             HStack {
                                 Spacer()
                                 if model.latestPhoto == nil {
@@ -281,7 +318,8 @@ struct CameraStudioView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(12)
                                 .background(.black.opacity(0.42), in: RoundedRectangle(cornerRadius: 12))
-                            HStack {
+                            if !cameraChatFocused {
+                                HStack {
                                 Button { model.latestPhoto == nil ? model.close() : model.nextShot() } label: {
                                     Image(systemName: model.latestPhoto == nil ? "chevron.left" : "arrow.counterclockwise")
                                         .frame(width: 44, height: 44)
@@ -307,13 +345,23 @@ struct CameraStudioView: View {
                                         .background(.black.opacity(0.5), in: Circle())
                                 }
                                 .accessibilityLabel("切换自动快门")
+                                }
+                                .padding(.top, 14)
                             }
-                            .padding(.top, 14)
+                            }
+                            .padding(16)
                         }
-                        .padding(16)
+                        .frame(width: frame.size.width, height: frame.size.height)
+                        .clipped()
                     }
-                    .frame(height: max(295, min(proxy.size.height * 0.49, 440)))
+                    .frame(height: cameraChatFocused
+                           ? max(118, min(proxy.size.height * 0.28, 160))
+                           : max(250, min(proxy.size.height * 0.43, 365)))
                     .clipShape(RoundedRectangle(cornerRadius: 26))
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        if cameraChatFocused { cameraChatFocused = false }
+                    }
                     .padding(.horizontal, 7)
 
                     if let notice = model.notice {
@@ -321,17 +369,20 @@ struct CameraStudioView: View {
                             .foregroundStyle(Palette.lilac)
                             .padding(.horizontal, 14)
                     }
-                    Text("只有打开相机才会取样 · 关闭后停止 · 照片先保存在本机")
-                        .font(.system(size: 10))
-                        .foregroundStyle(Palette.lilac.opacity(0.8))
-                        .padding(.bottom, 12)
+                    if !cameraChatFocused {
+                        Text("只有打开相机才会取样 · 关闭后停止 · 照片先保存在本机")
+                            .font(.system(size: 10))
+                            .foregroundStyle(Palette.lilac.opacity(0.8))
+                            .padding(.bottom, 12)
+                    }
                 }
                 .foregroundStyle(Palette.cream)
                 .background(Palette.panel, in: RoundedRectangle(cornerRadius: 29))
                 .overlay(RoundedRectangle(cornerRadius: 29).strokeBorder(.white.opacity(0.12)))
                 .padding(.horizontal, 12)
-                .padding(.bottom, 13)
+                .padding(.bottom, max(14, proxy.safeAreaInsets.bottom + 8))
             }
         }
+        .animation(.easeOut(duration: 0.18), value: cameraChatFocused)
     }
 }
