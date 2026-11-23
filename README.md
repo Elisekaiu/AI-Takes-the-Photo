@@ -147,4 +147,3 @@ protocol CameraDirector: Sendable {
 
 代码采用 [MIT License](LICENSE)。可以自由使用、修改、二次开发，也欢迎提交 issue 和 PR。
 
-准备把这个 Demo 发布成自己的仓库？看 [GitHub 发布说明](PUBLISH.md)，Mac 上也附有 `Publish-to-GitHub.command`。
