@@ -1,0 +1,295 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 56;
+	objects = {
+		9E2926955B88FE0518B4CA82 = {
+			isa = PBXBuildFile;
+			fileRef = BEA5C4035865BB57EAC470BA; /* AIShutterDemoApp.swift */
+		};
+		BEA5C4035865BB57EAC470BA = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = "AIShutterDemoApp.swift";
+			sourceTree = "<group>";
+		};
+		CF16B9100804643CACD95E05 = {
+			isa = PBXBuildFile;
+			fileRef = 61F4E6CFD102A163A8BF1C4F; /* CameraContext.swift */
+		};
+		61F4E6CFD102A163A8BF1C4F = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = "CameraContext.swift";
+			sourceTree = "<group>";
+		};
+		B254721384E93284112556F8 = {
+			isa = PBXBuildFile;
+			fileRef = 349D179BF2E4C42238217D88; /* CameraDirector.swift */
+		};
+		349D179BF2E4C42238217D88 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = "CameraDirector.swift";
+			sourceTree = "<group>";
+		};
+		6F3CCB5B05B878D29F1B1E4D = {
+			isa = PBXBuildFile;
+			fileRef = 1CF6FAE665617B561287D61D; /* CameraFrameGate.swift */
+		};
+		1CF6FAE665617B561287D61D = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = "CameraFrameGate.swift";
+			sourceTree = "<group>";
+		};
+		AAAEE83AF1FD73DCEC0FDC2F = {
+			isa = PBXBuildFile;
+			fileRef = 97058206405F2E0933F8E332; /* CameraHardware.swift */
+		};
+		97058206405F2E0933F8E332 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = "CameraHardware.swift";
+			sourceTree = "<group>";
+		};
+		0399846FA5BC908D1FDC7F97 = {
+			isa = PBXBuildFile;
+			fileRef = 25EE4348900B0C2F99C21E5B; /* CameraStudioModel.swift */
+		};
+		25EE4348900B0C2F99C21E5B = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = "CameraStudioModel.swift";
+			sourceTree = "<group>";
+		};
+		05224CB8928F61DB82B9BDB4 = {
+			isa = PBXBuildFile;
+			fileRef = 7A3AE4921CB002ED2C7F02F5; /* CameraStudioView.swift */
+		};
+		7A3AE4921CB002ED2C7F02F5 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = "CameraStudioView.swift";
+			sourceTree = "<group>";
+		};
+		3DA10A36BAA92187520389F4 = {
+			isa = PBXBuildFile;
+			fileRef = 92FB86AD319345FCB282584E; /* PhotoVault.swift */
+		};
+		92FB86AD319345FCB282584E = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = "PhotoVault.swift";
+			sourceTree = "<group>";
+		};
+		251A66F60EB1574C7900FB9B = {
+			isa = PBXFileReference;
+			explicitFileType = wrapper.application;
+			includeInIndex = 0;
+			path = AIShutterDemo.app;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		870B3294C0CBD48AF6BBCC1B = {
+			isa = PBXGroup;
+			children = (
+				96DC7B6B5526E30EFB51C316,
+				FBDC4F23F93125BBEEAE800C,
+			);
+			sourceTree = "<group>";
+		};
+		96DC7B6B5526E30EFB51C316 = {
+			isa = PBXGroup;
+			children = (
+				BEA5C4035865BB57EAC470BA,
+				61F4E6CFD102A163A8BF1C4F,
+				349D179BF2E4C42238217D88,
+				1CF6FAE665617B561287D61D,
+				97058206405F2E0933F8E332,
+				25EE4348900B0C2F99C21E5B,
+				7A3AE4921CB002ED2C7F02F5,
+				92FB86AD319345FCB282584E,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		FBDC4F23F93125BBEEAE800C = {
+			isa = PBXGroup;
+			children = (
+				251A66F60EB1574C7900FB9B,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		05F516295962E6A8A8205A30 = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E2926955B88FE0518B4CA82,
+				CF16B9100804643CACD95E05,
+				B254721384E93284112556F8,
+				6F3CCB5B05B878D29F1B1E4D,
+				AAAEE83AF1FD73DCEC0FDC2F,
+				0399846FA5BC908D1FDC7F97,
+				05224CB8928F61DB82B9BDB4,
+				3DA10A36BAA92187520389F4,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		326A678791C89F5FAABDFBFA = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = ();
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF4A15EEA61D4A3B097C1C27 = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = ();
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E8A3AD980EC179856012B7E = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7DE97F2CECB2601227982F09;
+			buildPhases = (
+				05F516295962E6A8A8205A30,
+				326A678791C89F5FAABDFBFA,
+				FF4A15EEA61D4A3B097C1C27,
+			);
+			buildRules = ();
+			dependencies = ();
+			name = AIShutterDemo;
+			productName = AIShutterDemo;
+			productReference = 251A66F60EB1574C7900FB9B;
+			productType = "com.apple.product-type.application";
+		};
+		98F54143AB4E86B28C3AFEE0 = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1530;
+				TargetAttributes = { 0E8A3AD980EC179856012B7E = { CreatedOnToolsVersion = 15.0; }; };
+			};
+			buildConfigurationList = 6650A2B5E24FA7522CE6B81C;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = "zh-Hans";
+			hasScannedForEncodings = 0;
+			knownRegions = ( "zh-Hans", en, Base );
+			mainGroup = 870B3294C0CBD48AF6BBCC1B;
+			productRefGroup = FBDC4F23F93125BBEEAE800C;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0E8A3AD980EC179856012B7E,
+			);
+		};
+		FE4EBDDE6F3DEC422D27EDFB = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1";
+			};
+			name = Debug;
+		};
+		2F0B100574F68C9D5D8D9A02 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_TESTABILITY = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "AI Takes the Photo";
+				INFOPLIST_KEY_NSCameraUsageDescription = "只有你主动打开相机时，才会预览并拍照。";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "把你选中的照片保存到 iPhone 相册。";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = dev.example.AIShutterDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1";
+			};
+			name = Debug;
+		};
+		439D45775871AC1E883D84D4 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1";
+			};
+			name = Release;
+		};
+		D3C89F1795A7A7A0D3DD1C8A = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_TESTABILITY = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "AI Takes the Photo";
+				INFOPLIST_KEY_NSCameraUsageDescription = "只有你主动打开相机时，才会预览并拍照。";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "把你选中的照片保存到 iPhone 相册。";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = dev.example.AIShutterDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1";
+			};
+			name = Release;
+		};
+		6650A2B5E24FA7522CE6B81C = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE4EBDDE6F3DEC422D27EDFB,
+				439D45775871AC1E883D84D4,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7DE97F2CECB2601227982F09 = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F0B100574F68C9D5D8D9A02,
+				D3C89F1795A7A7A0D3DD1C8A,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+	};
+	rootObject = 98F54143AB4E86B28C3AFEE0;
+}

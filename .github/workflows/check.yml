@@ -1,0 +1,19 @@
+name: Check
+on: [push, pull_request]
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: cd backend && npm test
+  ios:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the simulator demo (no signing)
+        run: xcodebuild -project AIShutterDemo.xcodeproj -target AIShutterDemo -sdk iphonesimulator -configuration Debug CODE_SIGNING_ALLOWED=NO build
+      - name: Test one-time camera context handoff
+        run: swiftc -parse-as-library App/CameraContext.swift Tests/ContextInboxTests.swift -o /tmp/ai-photo-context-tests && /tmp/ai-photo-context-tests

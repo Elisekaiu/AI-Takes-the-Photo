@@ -1,0 +1,32 @@
+# 可用 XcodeGen 生成工程：brew install xcodegen && xcodegen generate
+# 仓库也自带 .xcodeproj，无需安装 XcodeGen 就能从 Demo 开始。
+name: AIShutterDemo
+options:
+  bundleIdPrefix: dev.example
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    CODE_SIGN_STYLE: Automatic
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+targets:
+  AIShutterDemo:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: App
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.example.AIShutterDemo
+        GENERATE_INFOPLIST_FILE: YES
+        SWIFT_EMIT_LOC_STRINGS: YES
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: AI Takes the Photo
+        NSCameraUsageDescription: "打开相机后，陪你一起看画面并拍照。"
+        NSPhotoLibraryAddUsageDescription: "把你选中的照片保存进 iPhone 相册。"
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UILaunchScreen: {}
